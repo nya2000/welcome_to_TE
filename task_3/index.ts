@@ -45,3 +45,17 @@ const BALLONS: { [key: string]: BallonI } = {
 };
 
 // Ваш код здесь
+
+async function calculateTotalPublicBalloons(): Promise<number> {
+    let totalPublicBalloons = 0;
+
+    for (const color in BALLONS) {
+      const ballon = BALLONS[color];
+      if (ballon.isPublic) {
+        const amount = await fetchBallonAmount(ballon.id);
+        totalPublicBalloons += amount;
+      }
+    }
+
+    return totalPublicBalloons;
+  }
